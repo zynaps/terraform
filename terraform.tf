@@ -1,25 +1,13 @@
 terraform {
   required_providers {
-    cloudflare = {
-      source = "cloudflare/cloudflare"
-    }
-
     vultr = {
       source = "vultr/vultr"
     }
+
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+    }
   }
-}
-
-provider "cloudflare" {
-  email   = var.cloudflare_email
-  api_key = var.cloudflare_api_key
-}
-
-variable "cloudflare_email" {}
-variable "cloudflare_api_key" {}
-
-data "cloudflare_zone" "zynaps" {
-  name = "zynaps.ru"
 }
 
 provider "vultr" {
@@ -27,3 +15,11 @@ provider "vultr" {
 }
 
 variable "vultr_api_key" {}
+
+provider "cloudflare" {
+  api_key = var.cloudflare_api_key
+  email   = var.cloudflare_email
+}
+
+variable "cloudflare_email" {}
+variable "cloudflare_api_key" {}
