@@ -27,5 +27,6 @@ resource "cloudflare_record" "zynaps" {
   name    = each.value.label
   value   = each.value.main_ip
   type    = "A"
+  ttl     = 60
   proxied = false
 }
