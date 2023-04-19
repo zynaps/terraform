@@ -30,3 +30,23 @@ resource "cloudflare_record" "zynaps" {
   ttl     = 60
   proxied = false
 }
+
+resource "null_resource" "bootstrap" {
+  depends_on = [cloudflare_record.zynaps]
+
+  provisioner "local-exec" {
+    working_dir = "../ansible"
+    command = "sleep 60 && ansible-playbook bootstrap.yml dotfiles.yml --limit=${join(",", [for instance in vultr_instance.min : instance.label])}"
+  }
+}
+
+resource "null_resource" "setup" {
+  depends_on = [null_resource.bootstrap]
+
+  for_each = vultr_instance.min
+
+  provisioner "local-exec" {
+    working_dir = "../ansible"
+    command = "ansible-playbook ${each.value.label}.yml --limit=${each.value.label}"
+  }
+}
