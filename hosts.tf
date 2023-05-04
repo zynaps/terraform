@@ -36,7 +36,7 @@ resource "null_resource" "bootstrap" {
 
   provisioner "local-exec" {
     working_dir = "../ansible"
-    command = "sleep 60 && ansible-playbook bootstrap.yml dotfiles.yml --limit=${join(",", [for instance in vultr_instance.min : instance.label])}"
+    command     = "sleep 60 && ansible-playbook bootstrap.yml dotfiles.yml --limit=${join(",", [for instance in vultr_instance.min : instance.label])}"
   }
 }
 
@@ -47,6 +47,6 @@ resource "null_resource" "setup" {
 
   provisioner "local-exec" {
     working_dir = "../ansible"
-    command = "ansible-playbook ${each.value.label}.yml --limit=${each.value.label}"
+    command     = "ansible-playbook ${each.value.label}.yml --limit=${each.value.label}"
   }
 }
