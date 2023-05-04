@@ -4,3 +4,13 @@ users:
   - name: root
     ssh_authorized_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA18c+RB3kzMyyM7Bz9wMIKONOnWjTQNgyuz0SyOL7EVBKutnQfXZyXFSqK9TL1sx9oJCUkI808GbB8+UdUOZEBmP50PEcMoma7mSVJJjwNQJEhU7wXjtir7HSSEW5nJAIwUqPBm5100mSeFrPKYuRjUmifxfCc/Iahqn3S6QzFiRc1Wy+RSoxZ7k8nOYjt5oCrIMFjuo0N1/GsSfP3q3N52J9fSVK2vSkCwXINo7WQ9JzWguQO5bgUkHA9j+wH2piWoo6UKX2TRV43VDbwXrb+lGThSijY0ztshAMiMhqH1quQU7zQWGD33c6G/EZJGzCcdUBKlHx+YWTL+Lix9I/kw==
+  - name: igor
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA18c+RB3kzMyyM7Bz9wMIKONOnWjTQNgyuz0SyOL7EVBKutnQfXZyXFSqK9TL1sx9oJCUkI808GbB8+UdUOZEBmP50PEcMoma7mSVJJjwNQJEhU7wXjtir7HSSEW5nJAIwUqPBm5100mSeFrPKYuRjUmifxfCc/Iahqn3S6QzFiRc1Wy+RSoxZ7k8nOYjt5oCrIMFjuo0N1/GsSfP3q3N52J9fSVK2vSkCwXINo7WQ9JzWguQO5bgUkHA9j+wH2piWoo6UKX2TRV43VDbwXrb+lGThSijY0ztshAMiMhqH1quQU7zQWGD33c6G/EZJGzCcdUBKlHx+YWTL+Lix9I/kw==
+    groups: sudo
+
+write_files:
+  - content: "%sudo ALL=(ALL:ALL) NOPASSWD: ALL"
+    path: /etc/sudoers.d/99-sudo-nopasswd
+    owner: root:root
+    permissions: '0440'
